@@ -19,10 +19,12 @@ package com.drazisil.biomecompass;
 import com.drazisil.biomecompass.client.items.ItemBiomeCompass1;
 import com.drazisil.biomecompass.client.items.ItemBiomeCompassBase;
 import com.drazisil.biomecompass.proxy.BCCommonProxy;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -74,6 +76,13 @@ public class BiomeCompass
 
         GameRegistry.addRecipe(new ItemStack(biomeCompassItem1), " x ", "xyx", " x ",
                 'x', mapStack, 'y', compassStack);
+
+        /*
+        WAILA connection
+         */
+        if (Loader.isModLoaded("Waila")){
+            FMLInterModComms.sendMessage("Waila", "register", "com.draizisil.biomecompass.BiomeCompassWailaProvider.callbackRegister");
+        }
 
     }
 
