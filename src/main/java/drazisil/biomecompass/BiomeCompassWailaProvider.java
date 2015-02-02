@@ -14,9 +14,10 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass;
+package drazisil.biomecompass;
 
-import com.drazisil.biomecompass.client.items.ItemBiomeCompassBase;
+import drazisil.biomecompass.client.items.ItemBiomeCompass1;
+import drazisil.biomecompass.client.items.ItemBiomeCompassBase;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -41,10 +42,10 @@ public class BiomeCompassWailaProvider implements IWailaDataProvider {
     }
 
     @Override
-    public List<String> getWailaBody(ItemStack itemStack, List<String> list, IWailaDataAccessor iWailaDataAccessor, IWailaConfigHandler iWailaConfigHandler) {
+    public List<String> getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor iWailaDataAccessor, IWailaConfigHandler iWailaConfigHandler) {
         ItemBiomeCompassBase item = (ItemBiomeCompassBase)itemStack.getItem();
-        list.add("Range : " + item.getScanRadius());
-        return list;
+        currentTip.add("Range : " + item.getScanRadius());
+        return currentTip;
     }
 
     @Override
@@ -58,6 +59,9 @@ public class BiomeCompassWailaProvider implements IWailaDataProvider {
     }
 
     public static void callbackRegister(IWailaRegistrar registrar){
-        registrar.registerBodyProvider(new BiomeCompassWailaProvider(), ItemBiomeCompassBase.class);
+        BiomeCompassWailaProvider dataProvider = new BiomeCompassWailaProvider();
+
+        registrar.registerBodyProvider(dataProvider, ItemBiomeCompassBase.class);
+        registrar.registerBodyProvider(dataProvider, ItemBiomeCompass1.class);
     }
 }

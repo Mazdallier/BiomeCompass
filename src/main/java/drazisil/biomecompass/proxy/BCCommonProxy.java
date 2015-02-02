@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass.proxy;
+package drazisil.biomecompass.proxy;
 
 
 public class BCCommonProxy {

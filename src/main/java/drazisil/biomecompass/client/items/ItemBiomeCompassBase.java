@@ -14,9 +14,9 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass.client.items;
+package drazisil.biomecompass.client.items;
 
-import com.drazisil.biomecompass.BiomeCompass;
+import drazisil.biomecompass.BiomeCompass;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

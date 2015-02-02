@@ -14,11 +14,11 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass;
+package drazisil.biomecompass;
 
-import com.drazisil.biomecompass.client.items.ItemBiomeCompass1;
-import com.drazisil.biomecompass.client.items.ItemBiomeCompassBase;
-import com.drazisil.biomecompass.proxy.BCCommonProxy;
+import drazisil.biomecompass.client.items.ItemBiomeCompass1;
+import drazisil.biomecompass.client.items.ItemBiomeCompassBase;
+import drazisil.biomecompass.proxy.BCCommonProxy;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -31,15 +31,23 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Mod(modid = BiomeCompass.MODID, name = BiomeCompass.NAME, version = BiomeCompass.VERSION)
+@Mod(
+        modid = BiomeCompass.MODID,
+        name = BiomeCompass.NAME,
+        version = BiomeCompass.VERSION,
+        dependencies="after:Waila")
 public class BiomeCompass
 {
+    public static final Logger logger = LogManager.getLogger("BiomeCompass");
+
     public static final String MODID = "biomecompass";
     public static final String NAME = "Biome Compass";
     public static final String VERSION = "2.0";
 
-    @SidedProxy(clientSide = "com.drazisil.biomecompass.proxy.BCClientProxy", serverSide = "com.drazisil.biomecompass.proxy.BCDedicatedServerProxy")
+    @SidedProxy(clientSide = "drazisil.biomecompass.proxy.BCClientProxy", serverSide = "drazisil.biomecompass.proxy.BCDedicatedServerProxy")
     public static BCCommonProxy proxy;
 
     //BiomeCompassEventHandler events = new BiomeCompassEventHandler();
@@ -81,7 +89,8 @@ public class BiomeCompass
         WAILA connection
          */
         if (Loader.isModLoaded("Waila")){
-            FMLInterModComms.sendMessage("Waila", "register", "com.draizisil.biomecompass.BiomeCompassWailaProvider.callbackRegister");
+            logger.info("Waila detected. Registering BiomeCompass blocks with Waila registry.");
+            FMLInterModComms.sendMessage("Waila", "register", "drazisil.biomecompass.BiomeCompassWailaProvider.callbackRegister");
         }
 
     }
