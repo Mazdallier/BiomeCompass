@@ -16,12 +16,12 @@
 
 package drazisil.biomecompass;
 
-import drazisil.biomecompass.client.items.ItemBiomeCompass1;
 import drazisil.biomecompass.client.items.ItemBiomeCompassBase;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,20 +37,20 @@ public class BiomeCompassWailaProvider implements IWailaDataProvider {
     }
 
     @Override
-    public List<String> getWailaHead(ItemStack itemStack, List<String> list, IWailaDataAccessor iWailaDataAccessor, IWailaConfigHandler iWailaConfigHandler) {
-        return list;
+    public List<String> getWailaHead(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor iWailaDataAccessor, IWailaConfigHandler iWailaConfigHandler) {
+        return currentTip;
     }
 
     @Override
     public List<String> getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor iWailaDataAccessor, IWailaConfigHandler iWailaConfigHandler) {
         ItemBiomeCompassBase item = (ItemBiomeCompassBase)itemStack.getItem();
-        currentTip.add("Range : " + item.getScanRadius());
+        currentTip.add("Range :");
         return currentTip;
     }
 
     @Override
-    public List<String> getWailaTail(ItemStack itemStack, List<String> list, IWailaDataAccessor iWailaDataAccessor, IWailaConfigHandler iWailaConfigHandler) {
-        return list;
+    public List<String> getWailaTail(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor iWailaDataAccessor, IWailaConfigHandler iWailaConfigHandler) {
+        return currentTip;
     }
 
     @Override
@@ -61,7 +61,6 @@ public class BiomeCompassWailaProvider implements IWailaDataProvider {
     public static void callbackRegister(IWailaRegistrar registrar){
         BiomeCompassWailaProvider dataProvider = new BiomeCompassWailaProvider();
 
-        registrar.registerBodyProvider(dataProvider, ItemBiomeCompassBase.class);
-        registrar.registerBodyProvider(dataProvider, ItemBiomeCompass1.class);
+        registrar.registerBodyProvider(dataProvider, Block.class);
     }
 }
